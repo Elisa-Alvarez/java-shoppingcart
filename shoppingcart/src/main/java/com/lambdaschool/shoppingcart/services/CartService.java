@@ -3,6 +3,7 @@ package com.lambdaschool.shoppingcart.services;
 import com.lambdaschool.shoppingcart.models.Cart;
 import com.lambdaschool.shoppingcart.models.Product;
 import com.lambdaschool.shoppingcart.models.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -61,5 +62,13 @@ public interface CartService
      * @param product the product to be removed
      */
     void delete(Cart cart,
+                Product product);
+
+    @Transactional
+    Cart save(User user, Cart cart,
+              Product product);
+
+    @Transactional
+    void delete(User user, Cart cart,
                 Product product);
 }
