@@ -7,6 +7,7 @@ import com.lambdaschool.shoppingcart.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ public class CartController
         List<Cart> myCarts = cartService.findAllByUserId(userid);
         return new ResponseEntity<>(myCarts, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/cart/{cartId}",
             produces = {"application/json"})
     public ResponseEntity<?> getCartById(
